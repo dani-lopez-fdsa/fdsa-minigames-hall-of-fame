@@ -1,0 +1,67 @@
+.author-card {
+  margin-top: 52px;
+  border: 1px solid var(--ink);
+  background: var(--lime);
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) 1fr auto;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.author-portrait-wrap {
+  align-self: stretch;
+  min-height: 350px;
+  position: relative;
+  border-right: 1px solid var(--ink);
+  background: var(--ink);
+}
+
+.author-portrait {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  filter: saturate(.75) contrast(1.08);
+}
+
+.author-seal {
+  position: absolute;
+  right: -1px;
+  bottom: 0;
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 13px;
+  font: 500 11px "DM Mono";
+  letter-spacing: 1px;
+}
+
+.author-copy { padding: clamp(28px, 5vw, 62px); }
+.author-copy .kicker { color: var(--violet); }
+.author-copy h2 { max-width: 760px; }
+
+.author-copy > p:last-child {
+  max-width: 620px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.author-mark {
+  align-self: flex-start;
+  padding: 28px;
+  font-size: 42px;
+  filter: grayscale(1);
+}
+
+@media (max-width: 800px) {
+  .author-card { grid-template-columns: 1fr; }
+  .author-portrait-wrap {
+    min-height: 360px;
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+  .author-mark { display: none; }
+  .author-copy h2 br { display: none; }
+}
