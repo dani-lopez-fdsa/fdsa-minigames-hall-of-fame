@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hall of Fame de los minijuegos de Discord de FDSA">
+  <meta name="theme-color" content="#10120f">
+  <title>FDSA Arcade — Hall of Fame</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="hero">
+    <nav>
+      <a class="brand" href="#top" aria-label="FDSA Arcade, inicio"><span>FDSA</span> ARCADE</a>
+      <span class="live"><i></i> TEMPORADA 2026</span>
+    </nav>
+    <div class="hero-grid" id="top">
+      <div>
+        <p class="eyebrow">Discord Minigames Championship</p>
+        <h1>HALL<br><em>OF</em> FAME</h1>
+        <p class="intro">Victorias, gloria y pruebas irrefutables de quién manda en el lobby.</p>
+      </div>
+      <div class="hero-badge" aria-label="Trofeo pixelado"><span>🏆</span><small>NO EXCUSES<br>JUST WINS</small></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats" id="stats" aria-label="Estadísticas generales"></section>
+
+    <section class="panel leaderboard-section">
+      <div class="section-head">
+        <div><p class="kicker">Clasificación total</p><h2>Ranking agregado</h2></div>
+        <div class="filters" id="game-filters" aria-label="Filtrar por juego"></div>
+      </div>
+      <div id="leaderboard" class="leaderboard"></div>
+    </section>
+
+    <section class="split">
+      <article class="panel">
+        <div class="section-head"><div><p class="kicker">En números</p><h2>Estadísticas</h2></div></div>
+        <div id="insights" class="insights"></div>
+      </article>
+      <article class="panel crown-panel">
+        <p class="kicker">Jugador del momento</p>
+        <div id="mvp"></div>
+      </article>
+    </section>
+
+    <section class="panel history-section">
+      <div class="section-head">
+        <div><p class="kicker">Archivo oficial</p><h2>Resultados por fecha</h2></div>
+        <span class="stamp">VERIFICADO POR EL LOBBY</span>
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+  </main>
+
+  <footer><span>FDSA ARCADE © 2026</span><span>Las quejas se resuelven en la siguiente partida.</span></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>

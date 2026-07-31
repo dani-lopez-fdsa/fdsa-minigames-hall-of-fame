@@ -1,0 +1,15 @@
+{
+  "season": 2026,
+  "events": [
+    {
+      "date": "2026-07-31",
+      "game": "Smash Karts",
+      "mode": "Free For All",
+      "results": [
+        { "player": "Carlos", "wins": 2 },
+        { "player": "Navarro", "wins": 1 },
+        { "player": "Joan", "wins": 1 }
+      ]
+    }
+  ]
+}
