@@ -1,0 +1,6 @@
+/* Keep the WebGL scene behind every content region as a single stacking layer. */
+.hero,
+main {
+  position: relative;
+  z-index: 2;
+}
