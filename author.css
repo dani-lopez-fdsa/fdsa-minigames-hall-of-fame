@@ -1,13 +1,41 @@
-.author-card {
+.author-stage {
+  --author-progress: 0;
+  min-height: 155vh;
   margin-top: 52px;
+  position: relative;
+  z-index: 3;
+}
+
+.author-card {
   border: 1px solid var(--ink);
   background: var(--lime);
   display: grid;
   grid-template-columns: minmax(220px, 360px) 1fr auto;
   align-items: center;
-  position: relative;
+  position: sticky;
+  top: clamp(24px, 17vh, 150px);
   z-index: 2;
-  overflow: hidden;
+  overflow: visible;
+  opacity: calc(.18 + var(--author-progress) * .82);
+  transform: translateY(calc((1 - var(--author-progress)) * 34px)) scale(calc(.94 + var(--author-progress) * .06));
+  transform-origin: center;
+  clip-path: inset(
+    calc((1 - var(--author-progress)) * 46%)
+    calc((1 - var(--author-progress)) * 6%)
+  );
+  box-shadow: calc((1 - var(--author-progress)) * 18px) calc((1 - var(--author-progress)) * 18px) 0 rgba(117,87,255,.28);
+  will-change: transform, opacity, clip-path;
+}
+
+.author-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 49.8%, var(--ink) 50%, transparent 50.2%);
+  opacity: calc((1 - var(--author-progress)) * .35);
+  transform: scaleX(calc(1 - var(--author-progress)));
 }
 
 .author-portrait-wrap {
@@ -16,6 +44,10 @@
   position: relative;
   border-right: 1px solid var(--ink);
   background: var(--ink);
+  overflow: hidden;
+  transform: translate3d(calc((1 - var(--author-progress)) * -125%), calc((1 - var(--author-progress)) * 22%), 0) rotate(calc((1 - var(--author-progress)) * -8deg));
+  transform-origin: bottom left;
+  will-change: transform;
 }
 
 .author-portrait {
@@ -25,6 +57,8 @@
   inset: 0;
   object-fit: cover;
   filter: saturate(.75) contrast(1.08);
+  transform: scale(calc(1.18 - var(--author-progress) * .18));
+  will-change: transform;
 }
 
 .author-seal {
@@ -39,25 +73,80 @@
 }
 
 .author-copy { padding: clamp(28px, 5vw, 62px); }
-.author-copy .kicker { color: var(--violet); }
-.author-copy h2 { max-width: 760px; }
+.author-copy .kicker {
+  color: var(--violet);
+  opacity: clamp(0, calc((var(--author-progress) - .22) * 5), 1);
+  transform: translateY(calc((1 - var(--author-progress)) * -70px));
+}
+.author-copy h2 {
+  max-width: 760px;
+  opacity: clamp(0, calc((var(--author-progress) - .36) * 4), 1);
+  transform: translateX(calc((1 - var(--author-progress)) * 105%));
+}
 
 .author-copy > p:last-child {
   max-width: 620px;
   margin: 24px 0 0;
   font-size: 18px;
   line-height: 1.55;
+  opacity: clamp(0, calc((var(--author-progress) - .58) * 4.5), 1);
+  transform: translateY(calc((1 - var(--author-progress)) * 90px));
 }
+
+.author-copy > * { will-change: transform, opacity; }
 
 .author-mark {
   align-self: flex-start;
   padding: 28px;
   font-size: 42px;
   filter: grayscale(1);
+  opacity: clamp(0, calc((var(--author-progress) - .72) * 4), 1);
+  transform: translate(65px, -65px) rotate(calc((1 - var(--author-progress)) * 32deg));
 }
 
+.author-build-label {
+  position: absolute;
+  left: 50%;
+  top: -28px;
+  z-index: 10;
+  padding: 7px 10px;
+  color: var(--paper);
+  background: var(--ink);
+  font: 500 9px "DM Mono";
+  letter-spacing: 1.6px;
+  transform: translateX(-50%);
+  opacity: calc(1 - clamp(0, calc((var(--author-progress) - .72) * 4), 1));
+}
+
+.author-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -9px;
+  height: 5px;
+  background: rgba(16,18,15,.15);
+}
+
+.author-progress i {
+  display: block;
+  width: calc(var(--author-progress) * 100%);
+  height: 100%;
+  background: var(--orange);
+}
+
+.author-corner {
+  position: absolute;
+  z-index: 11;
+  width: 30px;
+  height: 30px;
+  opacity: calc(1 - var(--author-progress));
+}
+.author-corner--tl { top: -10px; left: -10px; border-top: 3px solid var(--orange); border-left: 3px solid var(--orange); }
+.author-corner--br { right: -10px; bottom: -10px; border-right: 3px solid var(--violet); border-bottom: 3px solid var(--violet); }
+
 @media (max-width: 800px) {
-  .author-card { grid-template-columns: 1fr; }
+  .author-stage { min-height: 165vh; }
+  .author-card { grid-template-columns: 1fr; top: 24px; }
   .author-portrait-wrap {
     min-height: 360px;
     border-right: 0;
@@ -65,4 +154,24 @@
   }
   .author-mark { display: none; }
   .author-copy h2 br { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .author-stage { min-height: 0; }
+  .author-card {
+    position: relative;
+    top: auto;
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    box-shadow: none;
+  }
+  .author-card::after,
+  .author-build-label,
+  .author-progress,
+  .author-corner { display: none; }
+  .author-portrait-wrap,
+  .author-portrait,
+  .author-copy > *,
+  .author-mark { opacity: 1; transform: none; }
 }

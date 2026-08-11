@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=4">
-  <link rel="stylesheet" href="author.css?v=4">
+  <link rel="stylesheet" href="author.css?v=5">
   <link rel="stylesheet" href="scene-layers.css?v=1">
 </head>
 <body>
@@ -65,23 +65,29 @@
       <div id="history" class="history"></div>
     </section>
 
-    <aside class="author-card" aria-label="Créditos de autor">
-      <div class="author-portrait-wrap">
-        <img class="author-portrait" src="assets/federico-damian-sanchez-arminio.png" alt="Retrato de Federico Damián Sánchez Arminio" loading="lazy">
-        <span class="author-seal" aria-hidden="true">FDSA</span>
-      </div>
-      <div class="author-copy">
-        <p class="kicker">Autor material de esta maravilla</p>
-        <h2>Federico Damián<br>Sánchez Arminio</h2>
-        <p>Copiloto digital, notario del lobby y arquitecto oficial de la gloria.</p>
-      </div>
-      <span class="author-mark" aria-hidden="true">🚀</span>
-    </aside>
+    <section class="author-stage" aria-label="Créditos de autor">
+      <aside class="author-card">
+        <span class="author-build-label" aria-hidden="true">CONSTRUYENDO LEYENDA</span>
+        <span class="author-corner author-corner--tl" aria-hidden="true"></span>
+        <span class="author-corner author-corner--br" aria-hidden="true"></span>
+        <div class="author-portrait-wrap">
+          <img class="author-portrait" src="assets/federico-damian-sanchez-arminio.png" alt="Retrato de Federico Damián Sánchez Arminio" loading="lazy">
+          <span class="author-seal" aria-hidden="true">FDSA</span>
+        </div>
+        <div class="author-copy">
+          <p class="kicker">Autor material de esta maravilla</p>
+          <h2>Federico Damián<br> Sánchez Arminio</h2>
+          <p>Copiloto digital, notario del lobby y arquitecto oficial de la gloria.</p>
+        </div>
+        <span class="author-mark" aria-hidden="true">🚀</span>
+        <span class="author-progress" aria-hidden="true"><i></i></span>
+      </aside>
+    </section>
   </main>
 
   <footer><span>FDSA ARCADE © 2026 · UNA PRODUCCIÓN FDSA</span><span>Las quejas se resuelven en la siguiente partida.</span></footer>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js" defer></script>
-  <script src="scene.js?v=3" defer></script>
+  <script src="scene.js?v=4" defer></script>
   <script src="app.js?v=3" defer></script>
 </body>
 </html>

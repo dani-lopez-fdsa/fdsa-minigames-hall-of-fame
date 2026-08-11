@@ -1,6 +1,31 @@
 (() => {
-  const canvas = document.querySelector('#arcade-scene');
+  const authorStage = document.querySelector('.author-stage');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (authorStage && !reduceMotion) {
+    let authorTicking = false;
+    const updateAuthorAssembly = () => {
+      const rect = authorStage.getBoundingClientRect();
+      const viewport = window.innerHeight;
+      const start = viewport * 0.88;
+      const distance = Math.max(rect.height - viewport * 0.48, viewport * 0.8);
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / distance));
+      authorStage.style.setProperty('--author-progress', progress.toFixed(4));
+      authorStage.classList.toggle('is-built', progress > 0.995);
+      authorTicking = false;
+    };
+    const requestAuthorUpdate = () => {
+      if (!authorTicking) {
+        authorTicking = true;
+        requestAnimationFrame(updateAuthorAssembly);
+      }
+    };
+    window.addEventListener('scroll', requestAuthorUpdate, { passive: true });
+    window.addEventListener('resize', requestAuthorUpdate, { passive: true });
+    updateAuthorAssembly();
+  }
+
+  const canvas = document.querySelector('#arcade-scene');
   if (!canvas || reduceMotion || !window.THREE) return;
 
   let renderer;
@@ -122,7 +147,7 @@
         if (entry.isIntersecting) entry.target.classList.add('is-visible');
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.stats,.panel,.author-card').forEach(element => {
+    document.querySelectorAll('.stats,.panel').forEach(element => {
       element.classList.add('reveal-target');
       revealObserver.observe(element);
     });
