@@ -1,15 +1,19 @@
 (() => {
   const authorStage = document.querySelector('.author-stage');
+  const authorCard = document.querySelector('.author-card');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (authorStage && !reduceMotion) {
+  if (authorStage && authorCard && !reduceMotion) {
     let authorTicking = false;
     const updateAuthorAssembly = () => {
       const rect = authorStage.getBoundingClientRect();
-      const viewport = window.innerHeight;
-      const start = viewport * 0.88;
-      const distance = Math.max(rect.height - viewport * 0.48, viewport * 0.8);
-      const progress = Math.min(1, Math.max(0, (start - rect.top) / distance));
+      const stickyTop = Number.parseFloat(getComputedStyle(authorCard).top) || 0;
+      const stageTop = rect.top + window.scrollY;
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+      const availableScroll = maxScroll - (stageTop - stickyTop);
+      const naturalDistance = rect.height - authorCard.offsetHeight;
+      const distance = Math.max(Math.min(naturalDistance, availableScroll - 24), 1);
+      const progress = Math.min(1, Math.max(0, (stickyTop - rect.top) / distance));
       authorStage.style.setProperty('--author-progress', progress.toFixed(4));
       authorStage.classList.toggle('is-built', progress > 0.995);
       authorTicking = false;

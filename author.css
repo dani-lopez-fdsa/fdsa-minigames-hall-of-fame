@@ -19,12 +19,8 @@
   opacity: calc(.18 + var(--author-progress) * .82);
   transform: translateY(calc((1 - var(--author-progress)) * 34px)) scale(calc(.94 + var(--author-progress) * .06));
   transform-origin: center;
-  clip-path: inset(
-    calc((1 - var(--author-progress)) * 46%)
-    calc((1 - var(--author-progress)) * 6%)
-  );
   box-shadow: calc((1 - var(--author-progress)) * 18px) calc((1 - var(--author-progress)) * 18px) 0 rgba(117,87,255,.28);
-  will-change: transform, opacity, clip-path;
+  will-change: transform, opacity;
 }
 
 .author-card::after {
@@ -45,8 +41,8 @@
   border-right: 1px solid var(--ink);
   background: var(--ink);
   overflow: hidden;
-  transform: translate3d(calc((1 - var(--author-progress)) * -125%), calc((1 - var(--author-progress)) * 22%), 0) rotate(calc((1 - var(--author-progress)) * -8deg));
-  transform-origin: bottom left;
+  transform: translate3d(0, calc((1 - var(--author-progress)) * -86vh), 0) rotate(calc((1 - var(--author-progress)) * -7deg));
+  transform-origin: bottom center;
   will-change: transform;
 }
 
@@ -97,11 +93,14 @@
 
 .author-mark {
   align-self: flex-start;
-  padding: 28px;
-  font-size: 42px;
-  filter: grayscale(1);
-  opacity: clamp(0, calc((var(--author-progress) - .72) * 4), 1);
-  transform: translate(65px, -65px) rotate(calc((1 - var(--author-progress)) * 32deg));
+  justify-self: center;
+  min-width: 108px;
+  padding: 26px 20px;
+  font: 64px/1 "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  opacity: clamp(0, calc((var(--author-progress) - .12) * 3), 1);
+  transform: translate3d(0, calc((1 - var(--author-progress)) * -105vh), 0) rotate(calc((1 - var(--author-progress)) * -48deg)) scale(calc(.72 + var(--author-progress) * .28));
+  transform-origin: center;
+  will-change: transform, opacity;
 }
 
 .author-build-label {
@@ -152,7 +151,16 @@
     border-right: 0;
     border-bottom: 1px solid var(--ink);
   }
-  .author-mark { display: none; }
+  .author-mark {
+    display: block;
+    position: absolute;
+    top: 368px;
+    right: 8px;
+    z-index: 6;
+    min-width: 0;
+    padding: 10px;
+    font-size: 46px;
+  }
   .author-copy h2 br { display: none; }
 }
 
