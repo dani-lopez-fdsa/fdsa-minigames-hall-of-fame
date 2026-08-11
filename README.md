@@ -18,3 +18,7 @@ Edita `data/results.json` y añade un objeto a `events`:
 ```
 
 La web recalcula automáticamente ranking, récords y estadísticas. Se publica con GitHub Pages desde la rama `main`.
+
+## Escena 3D
+
+`scene.js` construye una escena Three.js generativa y sincroniza la cámara, las formas y las partículas con el progreso del scroll. No necesita build step; si WebGL no está disponible o el usuario ha activado movimiento reducido, la web conserva automáticamente su versión estática.
