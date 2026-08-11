@@ -1,5 +1,6 @@
 .author-stage {
   --author-progress: 0;
+  --author-handoff: 1;
   min-height: 155vh;
   margin-top: 52px;
   position: relative;
@@ -41,9 +42,6 @@
   border-right: 1px solid var(--ink);
   background: var(--ink);
   overflow: hidden;
-  transform: translate3d(0, calc((1 - var(--author-progress)) * -86vh), 0) rotate(calc((1 - var(--author-progress)) * -7deg));
-  transform-origin: bottom center;
-  will-change: transform;
 }
 
 .author-portrait {
@@ -53,8 +51,6 @@
   inset: 0;
   object-fit: cover;
   filter: saturate(.75) contrast(1.08);
-  transform: scale(calc(1.18 - var(--author-progress) * .18));
-  will-change: transform;
 }
 
 .author-seal {
@@ -97,10 +93,33 @@
   min-width: 108px;
   padding: 26px 20px;
   font: 64px/1 "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-  opacity: clamp(0, calc((var(--author-progress) - .12) * 3), 1);
-  transform: translate3d(0, calc((1 - var(--author-progress)) * -105vh), 0) rotate(calc((1 - var(--author-progress)) * -48deg)) scale(calc(.72 + var(--author-progress) * .28));
-  transform-origin: center;
+}
+
+.has-author-flight .author-portrait-wrap,
+.has-author-flight .author-mark {
+  opacity: var(--author-handoff);
+}
+
+.author-flyer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  pointer-events: none;
   will-change: transform, opacity;
+}
+
+.author-flyer--portrait {
+  border: 1px solid var(--ink);
+  object-fit: cover;
+  filter: saturate(.75) contrast(1.08);
+  box-shadow: 9px 9px 0 rgba(255,93,40,.55);
+  transform-origin: top left;
+}
+
+.author-flyer--rocket {
+  font: 64px/1 "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  transform-origin: top left;
 }
 
 .author-build-label {
@@ -161,6 +180,7 @@
     padding: 10px;
     font-size: 46px;
   }
+  .author-flyer--rocket { font-size: 46px; }
   .author-copy h2 br { display: none; }
 }
 
@@ -177,7 +197,8 @@
   .author-card::after,
   .author-build-label,
   .author-progress,
-  .author-corner { display: none; }
+  .author-corner,
+  .author-flyer { display: none; }
   .author-portrait-wrap,
   .author-portrait,
   .author-copy > *,

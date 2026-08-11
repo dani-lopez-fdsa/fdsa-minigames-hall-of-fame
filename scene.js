@@ -1,9 +1,29 @@
 (() => {
   const authorStage = document.querySelector('.author-stage');
   const authorCard = document.querySelector('.author-card');
+  const authorPortraitWrap = document.querySelector('.author-portrait-wrap');
+  const authorPortrait = document.querySelector('.author-portrait');
+  const authorMark = document.querySelector('.author-mark');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (authorStage && authorCard && !reduceMotion) {
+  if (authorStage && authorCard && authorPortraitWrap && authorPortrait && authorMark && !reduceMotion) {
+    const portraitFlyer = document.createElement('img');
+    portraitFlyer.className = 'author-flyer author-flyer--portrait';
+    portraitFlyer.src = authorPortrait.currentSrc || authorPortrait.src;
+    portraitFlyer.alt = '';
+    portraitFlyer.setAttribute('aria-hidden', 'true');
+
+    const rocketFlyer = document.createElement('span');
+    rocketFlyer.className = 'author-flyer author-flyer--rocket';
+    rocketFlyer.textContent = '🚀';
+    rocketFlyer.setAttribute('aria-hidden', 'true');
+
+    document.body.append(portraitFlyer, rocketFlyer);
+    document.documentElement.classList.add('has-author-flight');
+    authorStage.style.setProperty('--author-handoff', '0');
+
+    const clamp = value => Math.min(1, Math.max(0, value));
+    const lerp = (start, end, progress) => start + (end - start) * progress;
     let authorTicking = false;
     const updateAuthorAssembly = () => {
       const rect = authorStage.getBoundingClientRect();
@@ -13,9 +33,44 @@
       const availableScroll = maxScroll - (stageTop - stickyTop);
       const naturalDistance = rect.height - authorCard.offsetHeight;
       const distance = Math.max(Math.min(naturalDistance, availableScroll - 24), 1);
-      const progress = Math.min(1, Math.max(0, (stickyTop - rect.top) / distance));
+      const progress = clamp((stickyTop - rect.top) / distance);
+      const flightProgress = clamp(window.scrollY / Math.max(maxScroll, 1));
+      const handoff = clamp((flightProgress - 0.94) / 0.06);
       authorStage.style.setProperty('--author-progress', progress.toFixed(4));
+      authorStage.style.setProperty('--author-handoff', handoff.toFixed(4));
       authorStage.classList.toggle('is-built', progress > 0.995);
+
+      const portraitTarget = authorPortraitWrap.getBoundingClientRect();
+      const cardTarget = authorCard.getBoundingClientRect();
+      const markTarget = authorMark.getBoundingClientRect();
+      const markStyles = getComputedStyle(authorMark);
+      const markPaddingLeft = Number.parseFloat(markStyles.paddingLeft) || 0;
+      const markPaddingTop = Number.parseFloat(markStyles.paddingTop) || 0;
+      const isMobile = window.innerWidth <= 800;
+      const portraitStartScale = isMobile ? 0.24 : 0.3;
+      const portraitScale = lerp(portraitStartScale, 1, flightProgress);
+      const portraitStartX = window.innerWidth - portraitTarget.width * portraitStartScale - 26;
+      const portraitLandingY = lerp(stickyTop + 1, portraitTarget.top, handoff);
+      const portraitX = lerp(portraitStartX, portraitTarget.left, flightProgress)
+        - Math.sin(flightProgress * Math.PI) * window.innerWidth * 0.07;
+      const portraitY = lerp(-portraitTarget.height * portraitStartScale * 0.78, portraitLandingY, flightProgress);
+      const portraitRotation = lerp(7, 0, flightProgress);
+      portraitFlyer.style.width = `${portraitTarget.width}px`;
+      portraitFlyer.style.height = `${portraitTarget.height}px`;
+      portraitFlyer.style.opacity = (1 - handoff).toFixed(4);
+      portraitFlyer.style.transform = `translate3d(${portraitX}px,${portraitY}px,0) rotate(${portraitRotation}deg) scale(${portraitScale})`;
+
+      const rocketBaseX = cardTarget.right - markTarget.width + markPaddingLeft;
+      const rocketLandingX = lerp(rocketBaseX, markTarget.left + markPaddingLeft, handoff);
+      const rocketBaseY = stickyTop + (isMobile ? 368 : 1) + markPaddingTop;
+      const rocketLandingY = lerp(rocketBaseY, markTarget.top + markPaddingTop, handoff);
+      const rocketX = lerp(window.innerWidth * 0.46, rocketLandingX, flightProgress)
+        + Math.sin(flightProgress * Math.PI) * window.innerWidth * 0.05;
+      const rocketY = lerp(isMobile ? -58 : -82, rocketLandingY, flightProgress);
+      const rocketScale = lerp(isMobile ? 0.68 : 0.62, 1, flightProgress);
+      const rocketRotation = lerp(-38, 0, flightProgress);
+      rocketFlyer.style.opacity = (1 - handoff).toFixed(4);
+      rocketFlyer.style.transform = `translate3d(${rocketX}px,${rocketY}px,0) rotate(${rocketRotation}deg) scale(${rocketScale})`;
       authorTicking = false;
     };
     const requestAuthorUpdate = () => {
