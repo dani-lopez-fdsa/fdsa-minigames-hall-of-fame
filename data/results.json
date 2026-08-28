@@ -10,6 +10,14 @@
         { "player": "Navarro", "wins": 1 },
         { "player": "Joan", "wins": 1 }
       ]
+    },
+    {
+      "date": "2026-08-28",
+      "game": "Putt Party Paradise",
+      "mode": "Torneo · 3 recorridos",
+      "results": [
+        { "player": "Ángel", "wins": 1 }
+      ]
     }
   ]
 }
