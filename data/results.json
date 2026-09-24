@@ -18,6 +18,16 @@
       "results": [
         { "player": "Ángel", "wins": 1 }
       ]
+    },
+    {
+      "date": "2026-09-24",
+      "game": "Smash Karts",
+      "mode": "Free For All",
+      "results": [
+        { "player": "Joan", "wins": 1 },
+        { "player": "Àlex Torres", "wins": 1 },
+        { "player": "Ángel", "wins": 1 }
+      ]
     }
   ]
 }
