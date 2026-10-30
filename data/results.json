@@ -6,9 +6,18 @@
       "game": "Smash Karts",
       "mode": "Free For All",
       "results": [
-        { "player": "Carlos", "wins": 2 },
-        { "player": "Navarro", "wins": 1 },
-        { "player": "Joan", "wins": 1 }
+        {
+          "player": "Carlos",
+          "wins": 2
+        },
+        {
+          "player": "Navarro",
+          "wins": 1
+        },
+        {
+          "player": "Joan",
+          "wins": 1
+        }
       ]
     },
     {
@@ -16,7 +25,10 @@
       "game": "Putt Party Paradise",
       "mode": "Torneo · 3 recorridos",
       "results": [
-        { "player": "Ángel", "wins": 1 }
+        {
+          "player": "Ángel",
+          "wins": 1
+        }
       ]
     },
     {
@@ -24,9 +36,66 @@
       "game": "Smash Karts",
       "mode": "Free For All",
       "results": [
-        { "player": "Joan", "wins": 1 },
-        { "player": "Àlex Torres", "wins": 1 },
-        { "player": "Ángel", "wins": 1 }
+        {
+          "player": "Joan",
+          "wins": 1
+        },
+        {
+          "player": "Àlex Torres",
+          "wins": 1
+        },
+        {
+          "player": "Ángel",
+          "wins": 1
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "game": "Make it Meme",
+      "mode": "Partida por puntos",
+      "results": [
+        {
+          "player": "Carlos",
+          "wins": 1
+        }
+      ],
+      "scoreboard": [
+        {
+          "player": "Carlos",
+          "score": 3146,
+          "position": 1
+        },
+        {
+          "player": "Ángel",
+          "score": 3108,
+          "position": 2
+        },
+        {
+          "player": "Guirado",
+          "score": 2117,
+          "position": 3
+        },
+        {
+          "player": "WokeHotDog",
+          "score": 2073,
+          "position": 4
+        },
+        {
+          "player": "Joan",
+          "score": 1307,
+          "position": 5
+        },
+        {
+          "player": "LtMurkth",
+          "score": 1125,
+          "position": 6
+        },
+        {
+          "player": "Guille",
+          "score": 714,
+          "position": 7
+        }
       ]
     }
   ]

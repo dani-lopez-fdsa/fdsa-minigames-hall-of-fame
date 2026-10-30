@@ -37,7 +37,8 @@ function render() {
 
   document.querySelector('#history').innerHTML = [...events].sort((a,b) => b.date.localeCompare(a.date)).map(event => {
     const [day, month] = formatDate(event.date).split(' ');
-    const podium = [...event.results].sort((a,b) => b.wins - a.wins).map((result, index) => `<span><b>${index + 1}.</b> ${result.player} · ${result.wins}</span>`).join('');
+    const byScore = Array.isArray(event.scoreboard);
+    const podium = [...(byScore ? event.scoreboard : event.results)].sort((a,b) => byScore ? b.score - a.score : b.wins - a.wins).map((result, index) => `<span><b>${index + 1}.</b> ${result.player} · ${byScore ? `${result.score} puntos` : result.wins}</span>`).join('');
     return `<article class="event"><div class="event-date"><strong>${day}</strong>${month} ${event.date.slice(0,4)}</div><div><div class="event-top"><span class="game">${event.game}</span><span class="game-tag">${event.mode}</span></div><div class="podium">${podium}</div></div></article>`;
   }).join('');
 }
