@@ -107,20 +107,6 @@
           "player": "Ángel",
           "wins": 1
         }
-      ],
-      "scoreboard": [
-        {
-          "player": "Ángel",
-          "position": 1
-        },
-        {
-          "player": "Joan",
-          "position": 2
-        },
-        {
-          "player": "Josep",
-          "position": 3
-        }
       ]
     }
   ]
